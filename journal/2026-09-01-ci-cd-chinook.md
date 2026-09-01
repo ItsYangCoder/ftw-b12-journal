@@ -17,11 +17,13 @@ The CD workflow uses a Databricks Bundle to validate and deploy the project to D
 
 The deployment to the Databricks `dev` target succeeded.
 
+![Successful Chinook CD deployment to Databricks dev](../assets/ci-cd-databricks-dev-success.png)
+
 ## What I learned
 
 CI helps find errors before changes are merged. CD helps deploy a tested and version-controlled project consistently.
 
-I also learned that deploying a Databricks job is different from running the job. The deployment succeeded, but the Chinook job was not executed because `run_job: false`.
+I learned that deploying a Databricks job is different from running the job. The initial deployment succeeded with `run_job: false). After running the workflow again, the `Run Chinook job` step also completed successfully.
 
 The CD workflow requires Databricks connection settings such as:
 
@@ -33,8 +35,8 @@ I also learned that environment variable names must match the Databricks Bundle 
 
 ## What confused me
 
-At first, I thought a successful deployment meant that the whole data pipeline had already run. I learned that deployment only makes the workflow available in Databricks; the job still needs to be triggered separately.
+At first, I thought a successful deployment meant that the whole data pipeline had already run. I learned that deployment makes the workflow available in Databricks, while running the job executes the actual pipeline.
 
 ## One small next step
 
-- [ ] Run the Chinook job in the `dev` target and validate the Raw, Clean, Mart, and analytics outputs.
+- [ ] Review the Raw, Clean, Mart, and analytics outputs after the successful job run.
