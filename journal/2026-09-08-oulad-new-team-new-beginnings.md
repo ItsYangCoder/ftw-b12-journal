@@ -82,8 +82,6 @@ The people in this illustration are AI-generated, but the anonymized message is 
 - **What do I want for us?** I want us to feel safe saying “hindi ko gets,” asking for help, and sharing ideas. I can miss my old team while still giving this new team the chance to become close.
 
 ## Mood or meme (optional)
-
-- Today felt like: **“The dashboard gets the attention, while data infrastructure quietly keeps the whole project alive.”**
 - image from google.com
 
 ![Dashboard being supported by data infrastructure](../assets/meme-alaking.jpg)
