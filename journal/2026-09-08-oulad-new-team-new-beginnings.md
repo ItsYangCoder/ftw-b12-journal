@@ -10,7 +10,7 @@ Today, we worked on the OULAD project foundation: folder structure, documentatio
 
 While setting up the project, I'm also adjusting to a new team. New dataset, new workflow, and new people to work with. Sabay ang technical setup at getting-to-know stage namin today. Hahaha.
 
-<!--assets/image (1).png -->
+![OULAD project setup](../assets/image%20(1).png)
 
 ---
 
