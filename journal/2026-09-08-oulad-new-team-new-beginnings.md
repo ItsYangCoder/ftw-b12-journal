@@ -158,7 +158,7 @@ But my new teammates told me something that made me happy: they had prayed that 
 
 Nakakataba ng puso, honestly. While I was still missing my old group, they were already happy to have me with them.
 
-![AI-generated illustration of Rhea with four appreciative teammates around a shared data-engineering workspace](../assets/new-team-grateful-message-composite.png)
+![AI-generated illustration of Rhea with four appreciative teammates around a shared data-engineering workspace](../assets/team-message.png)
 
 *An AI-generated illustration representing how welcomed I felt by my four new teammates—not a photo of our actual group.*
 
