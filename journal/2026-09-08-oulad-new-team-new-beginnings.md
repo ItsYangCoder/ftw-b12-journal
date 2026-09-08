@@ -1,45 +1,69 @@
 # New Dataset, New Team, Same Introvert
 
-*Setting up OULAD and getting comfortable with a new team.*
+*Setting up OULAD, organizing the work, and learning how to start again with a new team.*
 
-**September 8, 2026 · FTW Data Engineering Journey**
+**September 8, 2026 · FTW Data Engineering Journal**
 
-> **Today's mood:** productive, a little sentimental, pero looking forward to this new team.
+Today felt like two kinds of setup happening at once: building the foundation of our OULAD project and getting comfortable with a new group.
 
-Today, we worked on the OULAD project foundation: folder structure, documentation, file instructions, branch names, and task assignments. Binalikan din namin ang source profiling para clear sa bawat member kung anong data at rules ang hawak nila.
+On the technical side, we worked on the repository structure, file instructions, documentation, branch names, and task assignments. On the personal side, may adjustment din. I miss my old teammates, but I'm slowly getting to know the new people I'll be learning with.
 
-While setting up the project, I'm also adjusting to a new team. New dataset, new workflow, and new people to work with. Sabay ang technical setup at getting-to-know stage namin today. Hahaha.
+This entry captures that stage of the project: may structure and direction na, but we still have implementation, testing, and a lot of conversations ahead of us.
 
-![OULAD project setup](../assets/oulad-project-setup.png)
+## 1. Giving everyone a clear starting point
 
----
+![Databricks repository tree with the assessment_clean.sql implementation guide open](../assets/oulad-project-setup.png)
 
-## Setting up the project foundation
+*Our project in Databricks, with the folder structure on the left and the assessment-cleaning guide on the right. The file explains what to build; it is not yet the finished transformation.*
 
-We're building the [OULAD Data Engineering Pipeline](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline) using the **Open University Learning Analytics Dataset**. Kasama sa data ang students, module presentations, assessments, registrations, and activities in the Virtual Learning Environment or VLE.
+This screenshot sums up a big part of today's work. Hindi lang kami gumawa ng folders and empty files—we added instructions so each member can understand their assigned task.
 
-Our goal is to build a reliable pipeline for analyzing assessment performance, withdrawal, demographics, and student engagement. Kailangan understandable ang flow para kaya naming i-explain kung saan nanggaling ang results.
+The open file, `assessment_clean.sql`, includes the suggested branch, purpose, source, target, grain, transformation rules, and completion checks. For example, it tells the owner to preserve the 11 unknown Exam dates and validate the expected 206 assessment rows.
 
-### 1. Defined the layers and their responsibilities
+I realized how useful that is when working with a new team. Kapag binuksan nila ang file, they shouldn't have to guess what I meant or where to start.
 
-We organized the project around this flow:
+We're building the [OULAD Data Engineering Pipeline](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline) using the Open University Learning Analytics Dataset. It contains student, course, assessment, registration, and Virtual Learning Environment (VLE) data.
+
+Our planned flow is:
 
 **Source CSV → Bronze / Raw → Silver / Clean → Gold / Mart → Analytics**
 
-| Layer | Project responsibility |
+| Layer | Responsibility in our project |
 |---|---|
-| Source | Seven CSV files stored in the Databricks Volume. |
-| `open_university.oulad_bronze` | Original source records with ingestion metadata. |
-| `open_university.oulad_silver` | Planned cleaning, type conversion, and aggregation using documented rules. |
-| `open_university.oulad_gold` | Planned dimensions, facts, and reporting view using dbt. |
-| `open_university.oulad_quality` | Project validation work. |
-| Analytics + Metabase | Planned queries and dashboards for the business questions. |
+| Source | Seven CSV files stored in a Databricks Volume. |
+| `open_university.oulad_bronze` | Preserve source records and ingestion metadata. |
+| `open_university.oulad_silver` | Clean values, convert types, and apply documented aggregation rules. |
+| `open_university.oulad_gold` | Build dimensions, facts, and a supporting reporting view using dbt. |
+| `open_university.oulad_quality` | Support the project's validation work. |
+| Analytics and Metabase | Answer the business questions through queries and dashboards. |
 
-The reason for separating layers makes more sense to me now. Kapag may unexpected number sa dashboard, we can trace it back: source issue ba, cleaning rule, or a join in Gold?
+Mas clear na sa akin why these responsibilities are separated. If a result looks wrong, we have specific places to investigate: the source, the cleaning logic, or the Gold joins.
 
-### 2. Reviewed the Bronze baseline
+### Where the work belongs
 
-The seven source files had already been loaded during setup. Binalikan namin these recorded Bronze counts as the baseline for the next steps:
+We organized the files around those responsibilities:
+
+| Folder | What belongs here |
+|---|---|
+| `src/sql/00_setup/` | Initialization and source inspection. |
+| `src/sql/01_raw/` | Bronze ingestion scripts. |
+| `src/sql/02_clean/` | Silver transformations. |
+| `dbt/models/` | Silver source declarations, Gold dimensions, facts, and reporting view. |
+| `src/sql/04_analytics/` | Business analysis queries. |
+| `tests/` | Source, Silver, Gold, and business validation SQL. |
+| `dbt/tests/` | Automated dbt tests. |
+| `docs/` | Source findings, assumptions, pipeline plan, and schema documentation. |
+| `.github/workflows/` | CI/CD implementation guides. |
+
+We also discussed `resources/` for deployment and job definitions when needed. Gold transformations belong in `dbt/models/` in the current committed structure.
+
+My takeaway: a useful project structure should help people understand their work. The folder names matter, pero equally important ang instructions inside the files.
+
+## 2. Understanding the data before writing the transformations
+
+The setup screenshot shows the guides, but the rules inside them came from the source profiling we reviewed.
+
+The seven source files had already been loaded during the initial setup. These are our recorded Bronze baselines:
 
 | Bronze table | Recorded rows |
 |---|---:|
@@ -48,170 +72,121 @@ The seven source files had already been loaded during setup. Binalikan namin the
 | `student_assessment_raw` | 173,912 |
 | `student_info_raw` | 32,593 |
 | `student_registration_raw` | 32,593 |
-| `student_vle_raw` | **10,655,280** |
+| `student_vle_raw` | 10,655,280 |
 | `vle_raw` | 6,364 |
 
-Each Bronze table includes `ingestion_timestamp` and `ingestion_date`. These record when the data was loaded, kaya may ingestion history kami at the row level.
+Seven files sounds manageable, tapos makikita mo na 10.6 million rows ang student VLE alone. Hahaha.
 
-Our initial ingestion approach uses `CREATE TABLE IF NOT EXISTS ... USING DELTA AS SELECT ... FROM read_files(...)`. One thing I learned: **creating a table if it doesn't exist is not automatic incremental loading**. Kailangan pa rin naming define how to handle new batches and reruns.
+Bronze includes `ingestion_timestamp` and `ingestion_date` to record when the rows were loaded. The initial loading approach uses `CREATE TABLE IF NOT EXISTS ... USING DELTA AS SELECT ... FROM read_files(...)`.
 
-Also, **10.6 million rows** sa student VLE alone. Seven files sounds manageable until you see the actual row counts. Hahaha.
+An important distinction: creating the table only when it doesn't exist is not automatic incremental loading. Kailangan pa rin ng separate plan for new batches and safe reruns.
 
-### 3. Made the repository easier to work with
+### Missing is not the same as zero
 
-We replaced simple placeholders with file guides. Para when a member opens their assigned file, may starting point na sila.
+We found 173 missing scores, all in TMA records, and 11 missing assessment dates, all in Exam records.
 
-Each guide explains the purpose, input, expected output, transformation steps, completion checks, and suggested branch name.
+Our agreed rules preserve those records and keep unknown values as SQL NULL. Hindi namin dapat gawing zero ang missing score or invent an Exam deadline just to fill a blank.
 
-| Folder | Contents |
+NULL scores are excluded from averages, while the records can still count toward submission or participation analysis. Some source placeholders also use `?`, so checking only for SQL NULL would miss part of the problem.
+
+### Repeated keys need an explanation
+
+The VLE profiling showed 10,655,280 source rows but only 8,459,320 unique daily interaction keys—a difference of 2,195,960 rows.
+
+The daily key combines module, presentation, student, resource, and relative day. Our agreed plan is to group by that complete key and calculate `SUM(sum_click)`.
+
+Hindi enough na basta mag-remove ng repeated rows. Keeping an arbitrary row could discard recorded clicks. We expect fewer Silver rows after aggregation, but the total clicks must still reconcile with typed Bronze values.
+
+The 8,459,320 Silver rows are an expected output, not a claim that the transformation has already passed validation.
+
+### Observations, decisions, and implementation are different
+
+| Document | What I should write |
 |---|---|
-| `src/sql/00_setup/` | Initialization and source inspection. |
-| `src/sql/01_raw/` | Bronze ingestion scripts. |
-| `src/sql/02_clean/` | Silver transformation code. |
-| `dbt/models/` | Gold dimensions, facts, sources, and reporting view. |
-| `src/sql/04_analytics/` | Business analysis queries. |
-| `tests/` | Source, Silver, Gold, and business validation SQL. |
-| `dbt/tests/` | Automated dbt checks. |
-| `docs/` | Source findings, assumptions, pipeline plan, and schema documentation. |
-| `.github/workflows/` | CI/CD implementation guides. |
+| Source assessment | What we observed, such as the 173 missing TMA scores. |
+| Assumptions | Our agreed interpretation or treatment, such as preserving unknown scores as NULL. |
+| Pipeline plan | How to implement the rule and validate the result. |
 
-We also discussed `resources/` for deployment and job definitions when needed. Sa current committed structure, Gold work lives in `dbt/models/`.
+I used to mix these up. Ngayon, mas clear kung saan ilalagay ang finding, decision, and implementation steps.
 
-My takeaway here: having a file doesn't automatically make the task clear. Mas helpful kapag may expected output and specific completion criteria, especially while we're still learning the workflow.
+### Model the meaning of the data
 
----
+OULAD uses relative-day fields: day 0 means presentation start, and negative days can be valid. We shouldn't invent calendar dates without actual start dates, or turn an unknown date into day 0.
 
-## What I learned from the data
+We also aligned the Gold scope with sir's instructions: five dimensions and exactly two facts.
 
-### Missing value does not automatically mean zero
-
-We found **173 missing scores**, all from TMA records. Hindi puwedeng basta zero ang ipalit because an unknown score and an actual zero mean different things.
-
-Our agreed treatment is to preserve the records, convert missing placeholders to SQL NULL, and exclude NULL scores from averages. Kasama pa rin sila when counting submissions or participation.
-
-There are also **11 missing assessment dates**, all from Exam records. We keep those unknown deadlines as NULL; wala kaming reliable date na puwedeng ipalit.
-
-Some source values use `?` for missing information. Kaya checking only for SQL NULL isn't enough—we need to inspect the source representations too.
-
-### Separating findings, decisions, and implementation
-
-| Document | Question it answers | Example |
-|---|---|---|
-| Source assessment | What did we observe in the data? | 173 missing TMA scores. |
-| Assumptions | What interpretation or treatment did we agree on? | Unknown scores stay NULL. |
-| Pipeline plan | How will we implement and validate it? | Normalize placeholders, preserve records, validate scored/missing counts. |
-
-I used to mix these up. Ngayon, mas clear na sa akin where to document an observation, a decision, and the steps needed to implement it.
-
-### Understanding repeated keys before removing rows
-
-The student VLE profiling gave us another important finding:
-
-| Student VLE profiling | Rows |
-|---|---:|
-| Bronze source rows | 10,655,280 |
-| Unique daily interaction keys | 8,459,320 |
-| Excess rows over those unique keys | 2,195,960 |
-
-The daily key combines module, presentation, student, resource, and relative day. Kailangan complete ang combination to identify the intended daily interaction.
-
-Our agreed plan is to group records with the same key using **`SUM(sum_click)`**. Kapag arbitrary row lang ang itinira, we could lose recorded clicks.
-
-The expected Silver count is **8,459,320**, while total clicks must still match the typed Bronze values. **Planned output pa ito; implementation and validation are still pending.**
-
-This helped me understand grain better: *what exactly does one row represent?* Kailangan clear iyon before deciding how to handle repeated keys.
-
-### Working with relative days
-
-OULAD has date fields expressed as days relative to the presentation start. Day 0 means the start, and negative days are valid kapag before the presentation.
-
-We shouldn't invent calendar dates without a supplied start date. Hindi rin puwedeng gawing day 0 ang unknown date because zero already has a specific meaning.
-
-### Keeping the model aligned with the requirements
-
-We aligned the Gold scope with sir's instructions: **five dimensions and exactly two facts**.
-
-- Dimensions: `dim_student`, `dim_course`, `dim_module_presentation`, `dim_date`, `dim_demographics`.
+- Dimensions: `dim_student`, `dim_course`, `dim_module_presentation`, `dim_date`, and `dim_demographics`.
 - Facts: `fact_assessments` and `fact_vle_interactions`.
 
-We also planned a supporting **`vw_student_outcomes` view**. This keeps the complete enrollment population in reporting, kasama ang students without recorded assessment or VLE activity.
+The supporting `vw_student_outcomes` view will keep the full enrollment population in reporting, including students without recorded activity. For enrollment-level summaries, the two facts must be aggregated separately before joining them. Otherwise, puwedeng ma-multiply ang rows and measures.
 
-Another lesson: aggregate the two facts separately before combining them for enrollment-level reporting. Kapag directly joined ang detailed facts, multiple matches can inflate row counts, scores, or clicks.
+## 3. Turning the plan into visible team tasks
 
----
+![OULAD Pipeline Progress board with Backlog, Ready, In progress, In review, and Done columns](../assets/oulad-project-board.png)
 
-## Organizing the team workflow
+*The saved Project board snapshot shows 16 tasks in Backlog, 3 in Ready, and 1 in In review. No tasks are marked Done in this screenshot; these are captured statuses, not a live progress report.*
 
-We organized the GitHub issues with an owner, assigned files, suggested branch, dependencies, and a completion checklist. May **P0, P1, and P2** priority labels, plus area labels para easier to identify the type of work.
+After organizing the files, we organized the work itself.
 
-Our target completion is **Thursday, September 10, 2026**.
+Each GitHub issue has an owner, relevant files, a suggested branch, dependencies, and completion checks. We also added P0, P1, and P2 priority labels so the team can see which tasks need attention first.
 
-Some of the suggested branch names:
+The screenshot shows why this helps. The course-cleaning task is already in review, while other tasks are still waiting or ready to be picked up. Mas madaling makita where we are kaysa puro updates scattered across messages.
 
-- `feature/clean-assessments`
-- `feature/clean-students`
-- `feature/clean-vle`
-- `feature/build-dimensions`
-- `docs/update-readme`
+Some suggested branches are `feature/clean-assessments`, `feature/clean-students`, `feature/clean-vle`, and `feature/build-dimensions`.
 
-I also learned that **one task can include several related files**. The transformation, tests, and related documentation can stay on the same task branch. Hindi kailangan ng separate branch for every file.
+One task can include its transformation, tests, and related documentation on the same branch. Hindi kailangan ng bagong branch for every individual file.
 
-I wanted each task to give the assigned member a clear starting point. Para alam nila what to work on, which dependencies to wait for, and what evidence they need before marking it done.
+Our target completion is **Thursday, September 10, 2026**. The board helps us track that goal, but moving a card alone doesn't prove the code works. We still need validation results and review before calling a task done.
 
-![OULAD repository folders and assigned implementation files](../assets/oulad-project-board%20.png)
+### What is actually ready?
 
-### Honest progress check
+The foundation, recorded source profiling, documentation, file guides, and issue assignments are in place. The board snapshot shows some work moving into review, but the complete Silver layer, dbt Gold models, dashboards, and working CI/CD still need implementation or verification.
 
-**The foundation, recorded source profiling, documentation, file guides, and issue assignments are ready.** Pending pa ang Silver implementation, dbt Gold models, dashboards, and working CI/CD.
+There are also documented naming mismatches between some Bronze loaders and checks. Kailangan naming align those with the actual Databricks tables before running from a fresh environment.
 
-There are also documented naming mismatches in some Bronze loaders and checks. Kailangan naming align those with the actual Databricks tables before running from a fresh environment.
+A complete folder structure is a starting point. Working code, accurate results, and repeatable runs are the next proof we need.
 
-Reminder to myself: a complete folder structure is only the starting point. Kailangan pa rin ng working code, validated results, and repeatable runs.
+## 4. A new team, and mixed feelings
 
----
+Honestly, I feel a little sad about being assigned to another team.
 
-## A new team, and mixed feelings
+I miss my previous group. Nakapagpalagayan na kami ng loob, and we already knew how each person worked. We had that comfortable rhythm where asking questions and coordinating didn't feel awkward anymore.
 
-Honestly, I feel a little sad about being assigned to a new team again.
+Now we're back in the getting-to-know stage. May adjustment ulit, and I miss that familiarity.
 
-I miss my previous group. Nakapagpalagayan na kami ng loob, and we already knew how each person worked. We had that comfortable rhythm where asking questions and coordinating felt natural.
+But my new teammates told me something that made me happy: they had prayed that I would be assigned to their group.
 
-Now, we're back in the getting-to-know stage. May adjustment ulit, and I miss the familiarity of working with people I was already comfortable with.
+Nakakataba ng puso, honestly. While I was still missing my old group, they were already happy to have me with them.
 
-But my new teammates made me smile. They told me **they prayed that I would be assigned to their group.**
+![AI-generated illustration of Rhea with four appreciative teammates around a shared data-engineering workspace](../assets/new-team-grateful-message-composite.png)
 
-Nakakataba ng puso, honestly. While I was still missing my old group, they were already happy to have me on their team. That made this transition feel a little easier.
+*An AI-generated illustration representing how welcomed I felt by my four new teammates—not a photo of our actual group.*
 
-Our interactions still feel a bit formal and professional for now. Nagpapalagayan pa kami ng loob, and I understand that. Being comfortable with a new group takes time.
+Our interactions still feel a little formal and professional. Nagpapalagayan pa kami ng loob, and I understand that. Being comfortable with new people takes time.
 
-Then I messaged them and found out that **they were just shy around me too.**
+Then I messaged them and found out they were just shy around me too.
 
-Meanwhile, I was also trying to figure out how to become closer to them because I'm introverted. So apparently, pare-pareho lang pala kaming nahihiya. Hahaha.
+Meanwhile, I was also wondering how to become closer to them because I'm introverted. So apparently, pare-pareho lang pala kaming nahihiya. Hahaha.
 
-I told them to keep asking me questions para we can learn together and become more comfortable with each other. I don't know everything either. Sometimes, explaining something or discussing a question helps me understand it better too.
+I told them to keep asking me questions para we can learn together and get more comfortable with each other. I don't know everything either. Sometimes, explaining something or working through a question helps me understand it better too.
 
-When I told them I'm introverted, they said they were too.
+When I said I was introverted, they told me they were too.
 
-Ayon, a group of introverts trying to get comfortable with one another. At least now we know why everyone seemed a little reserved. Hahaha.
+Ayon, a group of introverts figuring out how to start the conversation.
 
+I want us to feel comfortable saying “hindi ko gets,” asking for help, or sharing an idea. Hopefully, the more we work together, the more natural those conversations will become.
 
-![OULAD new team member](../assets/oulad-project-board%20.png)
-
-I want us to feel comfortable saying “hindi ko gets,” asking for help, or sharing an idea. Hopefully, as we work through the project, those conversations will start to feel more natural.
-
-I can miss my old team and still look forward to getting close to this one. May lungkot pa, but I'm also glad that my new teammates were honest about how they felt.
-
----
+I can miss my old team and still look forward to getting close to this one. Hindi naman kailangang mawala agad ang lungkot before I can appreciate a new beginning.
 
 ## What I'm taking from today
 
-Today helped me understand how many decisions go into setting up a project: table grain, missing values, folder responsibilities, validation, and task dependencies. Mas clear na sa akin why these need to be discussed before everyone starts coding.
+The three images capture different parts of the same day: giving the project a clear structure, making team progress visible, and getting comfortable with the people behind the work.
 
-On the personal side, I learned that someone who seems very formal might just be shy too. Minsan, kailangan lang may unang mag-open ng conversation.
+Technically, I learned that setup involves decisions about grain, missing values, validation, and dependencies—not just creating folders. Personally, I learned that someone who seems very formal might just be shy too.
 
-Next, we'll align the Bronze names, implement the assigned transformations, and validate the outputs. As a teammate, I'll keep encouraging questions para we can learn together and get more comfortable working as a group.
+Next, we'll align the Bronze names, work through the assigned transformations, and validate the outputs. I'll also keep encouraging questions para we can learn together.
 
-*OULAD foundation prepared. Getting comfortable with the team is still a work in progress, pero we're getting there.*
+*The project has a starting point. So does the team.*
 
 ---
 
@@ -221,9 +196,8 @@ Next, we'll align the Bronze names, implement the assigned transformations, and 
 - [Pipeline plan](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline/blob/main/docs/pipeline_plan.md)
 - [Source profiling results](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline/blob/main/docs/source_assessment.md)
 - [Documented assumptions](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline/blob/main/docs/assumptions.md)
-- [Assigned project issues](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline/issues)
+- [Project issues](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline/issues)
 
-*Technical counts refer to the recorded current source batch. Planned outputs still need implementation and validation.*
+*Counts refer to the recorded current source batch. Screenshots show captured project states; planned outputs still need implementation and validation.*
 
 </details>
-
