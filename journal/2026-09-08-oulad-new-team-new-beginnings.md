@@ -85,6 +85,10 @@ The people in this illustration are AI-generated, but the anonymized message is 
 
 - Today felt like: **“I was setting up a data pipeline, pero may unexpected soft-skills validation test din pala—and somehow, it passed.”**
 
+![Two-panel meme about setting up a data pipeline and unexpectedly passing a soft-skills test](../assets/oulad-soft-skills-meme.jpg)
+
+*When the project setup turns into an unexpected emotional validation test. Allergies lang ito.*
+
 ---
 
 ### Project references
