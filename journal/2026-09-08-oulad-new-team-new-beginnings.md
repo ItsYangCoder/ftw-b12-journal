@@ -84,12 +84,12 @@ The people in this illustration are AI-generated, but the anonymized message is 
 ## Mood or meme (optional)
 
 - Today felt like: **“The dashboard gets the attention, while data infrastructure quietly keeps the whole project alive.”**
+- image from google.com
 
 ![Dashboard being supported by data infrastructure](../assets/meme-alaking.jpg)
 
-*The dashboard may look effortless, pero behind it, data infrastructure is doing the rescue mission.*
 
----
+
 
 ### Project references
 
