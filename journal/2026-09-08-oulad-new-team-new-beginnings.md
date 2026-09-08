@@ -160,21 +160,31 @@ Nakakataba ng puso, honestly. While I was still missing my old group, they were 
 
 ![AI-generated illustration of Rhea with four appreciative teammates around a shared data-engineering workspace](../assets/team-message.png)
 
-*An AI-generated illustration representing how welcomed I felt by my four new teammates—not a photo of our actual group.*
+*This illustration includes an actual message from one of my new teammates. The people are AI-generated and are not portraits of our real group.*
 
-Our interactions still feel a little formal and professional. Nagpapalagayan pa kami ng loob, and I understand that. Being comfortable with new people takes time.
+That message really stayed with me.
 
-Then I messaged them and found out they were just shy around me too.
+I didn't expect someone to see me that way. Sabi niya, hopefully, kapag sila naman ang naging lead in the future at Data Engineers na kami, maging katulad ko raw sila. Ayun, biglang naging iyakan session ang simpleng group chat. May allergies daw siya, pero parang ako rin kailangan ko nang maghanap ng excuse. Hahaha.
 
-Meanwhile, I was also wondering how to become closer to them because I'm introverted. So apparently, pare-pareho lang pala kaming nahihiya. Hahaha.
+For a long time, I kept telling myself that I wasn't good at teaching and that I didn't have enough soft skills. Masyado ko palang dini-down ang sarili ko. I was so focused on the things I still couldn't do that I failed to notice the things I was already giving to other people: patience, guidance, encouragement, and a safe space where they could ask questions.
 
-I told them to keep asking me questions para we can learn together and get more comfortable with each other. I don't know everything either. Sometimes, explaining something or working through a question helps me understand it better too.
+That message made me realize that maybe I *can* teach. Maybe helping someone understand, explaining what I know, and admitting what I still don't know are already part of teaching. Hindi ko kailangan maging perfect or know everything before I can help someone learn.
 
-When I said I was introverted, they told me they were too.
+I appreciate every compliment they gave me—their kind words about my intelligence, my character, and the way I helped them. Hindi ko pa rin alam kung saan ko ilalagay lahat ng compliments kasi sanay akong i-down ang sarili ko, pero I want to learn how to receive them without immediately arguing with the people who gave them. Baka naman may nakikita talaga sila sa akin na kailangan ko ring matutunang makita sa sarili ko.
 
-Ayon, a group of introverts figuring out how to start the conversation.
+The part about them wanting to become like me when they lead someday touched me the most. I hope I get to witness that moment. I want to see them become confident Data Engineers, guide their own teams, and create the same kind of environment where people are comfortable learning and asking for help.
 
-I want us to feel comfortable saying “hindi ko gets,” asking for help, or sharing an idea. Hopefully, the more we work together, the more natural those conversations will become.
+I'm rooting for them—hindi lang para matapos namin itong project, but for the leaders and Data Engineers they are becoming.
+
+At the same time, I don't want them to become an exact copy of me. I hope they become even better: leaders with their own style, strengths, and stories. Kapag dumating yung time na sila na ang nagtuturo at nagli-lead, I hope I'll be there somewhere—probably emotional again, pretending na allergies lang din. Hahaha.
+
+Our interactions still feel a little formal and professional because nagpapalagayan pa kami ng loob. Then I messaged them and found out they were just shy around me too.
+
+Meanwhile, I was also wondering how to become closer to them because I'm introverted. So apparently, pare-pareho lang pala kaming nahihiya and waiting for someone to start the conversation.
+
+I told them to keep asking questions para we can learn together and get more comfortable with each other. I don't know everything either. Sometimes, explaining something or working through a question helps me understand it better too.
+
+I want us to feel safe saying “hindi ko gets,” asking for help, or sharing an idea. Hopefully, the more we work together, the more natural those conversations will become.
 
 I can miss my old team and still look forward to getting close to this one. Hindi naman kailangang mawala agad ang lungkot before I can appreciate a new beginning.
 
