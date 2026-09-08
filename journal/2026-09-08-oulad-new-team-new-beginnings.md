@@ -1,44 +1,45 @@
-# 🌱 New Dataset, New Team, Same Introvert
-### OULAD setup, data discoveries, at ang plot twist na pare-pareho pala kaming nahihiya
+# New Dataset, New Team, Same Introvert
+
+*Setting up OULAD and getting comfortable with a new team.*
 
 **September 8, 2026 · FTW Data Engineering Journey**
 
-> **Today's mood:** productive, medyo sentimental, at unti-unting nae-excite sa bagong simula. 💛
+> **Today's mood:** productive, a little sentimental, pero looking forward to this new team.
 
-Ngayong araw, inayos namin ang foundation ng OULAD project: folder structure, documentation, instructions sa bawat file, branch names, at paghahati ng tasks. Binalikan din namin ang source profiling para malinaw kung ano talaga ang hahawakan ng bawat isa.
+Today, we worked on the OULAD project foundation: folder structure, documentation, file instructions, branch names, and task assignments. Binalikan din namin ang source profiling para clear sa bawat member kung anong data at rules ang hawak nila.
 
-Pero habang sine-set up ko ang project, may isa pa pala akong ina-adjust: sarili ko sa bagong team. Bagong dataset, bagong workflow, bagong mga kausap. Parang sabay na project setup at social setup ang ganap ko today. Hahahaha.
+While setting up the project, I'm also adjusting to a new team. New dataset, new workflow, and new people to work with. Sabay ang technical setup at getting-to-know stage namin today. Hahaha.
 
 <!-- Add Rhea's supplied OULAD setup screenshot here after upload. -->
 
 ---
 
-## 🧱 Paano namin binuo ang foundation
+## Setting up the project foundation
 
-Ang project namin ay [OULAD Data Engineering Pipeline](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline), gamit ang **Open University Learning Analytics Dataset**. May data tungkol sa students, module presentations, assessments, registrations, at activities sa Virtual Learning Environment o VLE.
+We're building the [OULAD Data Engineering Pipeline](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline) using the **Open University Learning Analytics Dataset**. Kasama sa data ang students, module presentations, assessments, registrations, and activities in the Virtual Learning Environment or VLE.
 
-Ang goal: makabuo ng maayos na data pipeline na puwedeng gamitin para pag-aralan ang assessment performance, withdrawal, demographics, at student engagement.
+Our goal is to build a reliable pipeline for analyzing assessment performance, withdrawal, demographics, and student engagement. Kailangan understandable ang flow para kaya naming i-explain kung saan nanggaling ang results.
 
-### 1. Inayos ang layers at responsibilities
+### 1. Defined the layers and their responsibilities
 
-Ito ang flow na sinusundan ng project:
+We organized the project around this flow:
 
 **Source CSV → Bronze / Raw → Silver / Clean → Gold / Mart → Analytics**
 
-| Bahagi | Gamit sa project namin |
+| Layer | Project responsibility |
 |---|---|
-| Source | Dito nanggagaling ang seven CSV files sa Databricks Volume. |
-| `open_university.oulad_bronze` | Original source records, kasama ang ingestion metadata. |
-| `open_university.oulad_silver` | Planned cleaning, type conversion, at aggregation ayon sa documented rules. |
-| `open_university.oulad_gold` | Planned dimensions, facts, at reporting view gamit ang dbt. |
-| `open_university.oulad_quality` | Para sa validation work ng project. |
-| Analytics + Metabase | Planned queries at dashboards para sagutin ang business questions. |
+| Source | Seven CSV files stored in the Databricks Volume. |
+| `open_university.oulad_bronze` | Original source records with ingestion metadata. |
+| `open_university.oulad_silver` | Planned cleaning, type conversion, and aggregation using documented rules. |
+| `open_university.oulad_gold` | Planned dimensions, facts, and reporting view using dbt. |
+| `open_university.oulad_quality` | Project validation work. |
+| Analytics + Metabase | Planned queries and dashboards for the business questions. |
 
-Mas naiintindihan ko na kung bakit may magkakahiwalay na layers. Kapag may kakaibang number sa dashboard, may malinaw kaming babalikan: source ba, cleaning rule ba, o join sa Gold?
+The reason for separating layers makes more sense to me now. Kapag may unexpected number sa dashboard, we can trace it back: source issue ba, cleaning rule, or a join in Gold?
 
-### 2. May Bronze baseline na kaming pagbabasehan
+### 2. Reviewed the Bronze baseline
 
-Sa setup at profiling na binabalikan namin ngayon, na-load na ang seven source files. Ito ang recorded Bronze counts:
+The seven source files had already been loaded during setup. Binalikan namin these recorded Bronze counts as the baseline for the next steps:
 
 | Bronze table | Recorded rows |
 |---|---:|
@@ -50,61 +51,61 @@ Sa setup at profiling na binabalikan namin ngayon, na-load na ang seven source f
 | `student_vle_raw` | **10,655,280** |
 | `vle_raw` | 6,364 |
 
-May `ingestion_timestamp` at `ingestion_date` ang Bronze tables para may record kung kailan na-load ang data.
+Each Bronze table includes `ingestion_timestamp` and `ingestion_date`. These record when the data was loaded, kaya may ingestion history kami at the row level.
 
-Ang initial ingestion approach namin ay `CREATE TABLE IF NOT EXISTS ... USING DELTA AS SELECT ... FROM read_files(...)`. Natutunan ko rin na ang pag-create ng table kapag wala pa ito ay **hindi automatic incremental loading**. Kailangan pa rin ng malinaw na strategy kapag may bagong batch.
+Our initial ingestion approach uses `CREATE TABLE IF NOT EXISTS ... USING DELTA AS SELECT ... FROM read_files(...)`. One thing I learned: **creating a table if it doesn't exist is not automatic incremental loading**. Kailangan pa rin naming define how to handle new batches and reruns.
 
-At yes, **10.6 million rows** ang student VLE. Seven files lang pakinggan, pero hindi ibig sabihin maliit lang ang laman. 😂
+Also, **10.6 million rows** sa student VLE alone. Seven files sounds manageable until you see the actual row counts. Hahaha.
 
-### 3. Ginawang understandable ang repository
+### 3. Made the repository easier to work with
 
-Pinalitan namin ang simpleng placeholders ng guides para alam ng future assigned member kung ano ang gagawin sa file.
+We replaced simple placeholders with file guides. Para when a member opens their assigned file, may starting point na sila.
 
-May purpose, input, expected output, transformation steps, completion checks, at suggested branch name.
+Each guide explains the purpose, input, expected output, transformation steps, completion checks, and suggested branch name.
 
-| Folder | Ano ang ilalagay |
+| Folder | Contents |
 |---|---|
-| `src/sql/00_setup/` | Initialization at source inspection. |
+| `src/sql/00_setup/` | Initialization and source inspection. |
 | `src/sql/01_raw/` | Bronze ingestion scripts. |
 | `src/sql/02_clean/` | Silver transformation code. |
-| `dbt/models/` | Gold dimensions, facts, sources, at reporting view. |
+| `dbt/models/` | Gold dimensions, facts, sources, and reporting view. |
 | `src/sql/04_analytics/` | Business analysis queries. |
-| `tests/` | Source, Silver, Gold, at business validation SQL. |
+| `tests/` | Source, Silver, Gold, and business validation SQL. |
 | `dbt/tests/` | Automated dbt checks. |
-| `docs/` | Source findings, assumptions, pipeline plan, at schema documentation. |
-| `.github/workflows/` | Guides para sa CI/CD implementation. |
+| `docs/` | Source findings, assumptions, pipeline plan, and schema documentation. |
+| `.github/workflows/` | CI/CD implementation guides. |
 
-Napag-usapan din namin ang `resources/` para sa deployment/job definitions kapag kailangan na. Sa current committed structure, nasa `dbt/models/` ang Gold work.
+We also discussed `resources/` for deployment and job definitions when needed. Sa current committed structure, Gold work lives in `dbt/models/`.
 
-Ang realization ko: kapag may file na, hindi ibig sabihin alam na agad ng teammate ang dapat ilagay. Malaking tulong ang instructions na may example ng output at malinaw na “done when.”
+My takeaway here: having a file doesn't automatically make the task clear. Mas helpful kapag may expected output and specific completion criteria, especially while we're still learning the workflow.
 
 ---
 
-## 🔎 Ang mga “ahhh, kaya pala!” moments ko sa OULAD
+## What I learned from the data
 
 ### Missing value does not automatically mean zero
 
-May **173 missing scores**, at lahat ay sa TMA records. Hindi namin sila basta gagawing zero dahil magkaiba ang “walang recorded score” at “nakakuha ng zero.”
+We found **173 missing scores**, all from TMA records. Hindi puwedeng basta zero ang ipalit because an unknown score and an actual zero mean different things.
 
-Ang agreed treatment: preserve the records, gawing SQL NULL ang missing placeholders, at huwag isama ang NULL scores sa average. Kasama pa rin ang records kapag submission o participation ang binibilang.
+Our agreed treatment is to preserve the records, convert missing placeholders to SQL NULL, and exclude NULL scores from averages. Kasama pa rin sila when counting submissions or participation.
 
-May **11 missing assessment dates**, lahat sa Exam records. Hindi rin namin huhulaan ang deadlines.
+There are also **11 missing assessment dates**, all from Exam records. We keep those unknown deadlines as NULL; wala kaming reliable date na puwedeng ipalit.
 
-May source values ding `?`, kaya hindi sapat na SQL NULL lang ang hanapin sa profiling. Kailangan tingnan kung paano talaga nirerepresent ng source ang missing information.
+Some source values use `?` for missing information. Kaya checking only for SQL NULL isn't enough—we need to inspect the source representations too.
 
-### Source assessment, assumptions, at pipeline plan: magkakaugnay pero magkaiba
+### Separating findings, decisions, and implementation
 
-| Document | Tanong na sinasagot | Example |
+| Document | Question it answers | Example |
 |---|---|---|
-| Source assessment | Ano ang nakita namin sa data? | May 173 missing TMA scores. |
-| Assumptions | Ano ang agreed interpretation o treatment? | Unknown scores stay NULL. |
-| Pipeline plan | Paano namin ipapatupad at iche-check iyon? | Normalize placeholders, preserve records, validate scored/missing counts. |
+| Source assessment | What did we observe in the data? | 173 missing TMA scores. |
+| Assumptions | What interpretation or treatment did we agree on? | Unknown scores stay NULL. |
+| Pipeline plan | How will we implement and validate it? | Normalize placeholders, preserve records, validate scored/missing counts. |
 
-Dati parang magkakahalo sila sa isip ko. Ngayon mas malinaw kung saan ilalagay ang observation, decision, at implementation plan.
+I used to mix these up. Ngayon, mas clear na sa akin where to document an observation, a decision, and the steps needed to implement it.
 
-### Repeated keys need context bago mag-delete
+### Understanding repeated keys before removing rows
 
-Ito ang isa sa pinakamalaking discoveries:
+The student VLE profiling gave us another important finding:
 
 | Student VLE profiling | Rows |
 |---|---:|
@@ -112,40 +113,40 @@ Ito ang isa sa pinakamalaking discoveries:
 | Unique daily interaction keys | 8,459,320 |
 | Excess rows over those unique keys | 2,195,960 |
 
-Ang daily key ay combination ng module, presentation, student, resource, at relative day.
+The daily key combines module, presentation, student, resource, and relative day. Kailangan complete ang combination to identify the intended daily interaction.
 
-Sa agreed plan namin, pagsasamahin ang records sa parehong key gamit ang **`SUM(sum_click)`**. Kung basta isang row lang ang ititira, puwedeng mawala ang recorded clicks.
+Our agreed plan is to group records with the same key using **`SUM(sum_click)`**. Kapag arbitrary row lang ang itinira, we could lose recorded clicks.
 
-Kaya ang expected Silver count ay **8,459,320**, pero kailangan mag-match pa rin ang total clicks sa typed Bronze values. **Expected output pa ito; kailangan pang i-implement at i-validate.**
+The expected Silver count is **8,459,320**, while total clicks must still match the typed Bronze values. **Planned output pa ito; implementation and validation are still pending.**
 
-Dito ko mas naintindihan ang grain: *ano ba talaga ang ibig sabihin ng isang row?*
+This helped me understand grain better: *what exactly does one row represent?* Kailangan clear iyon before deciding how to handle repeated keys.
 
-### Ang “date” ay puwedeng relative day
+### Working with relative days
 
-Sa OULAD, may dates na bilang ng araw relative sa presentation start. Day 0 ang start; valid ang negative days kapag before start.
+OULAD has date fields expressed as days relative to the presentation start. Day 0 means the start, and negative days are valid kapag before the presentation.
 
-Hindi namin dapat gawing actual calendar dates kung wala namang supplied start date. At hindi rin puwedeng gawing day 0 ang unknown date, kasi may totoong meaning ang zero.
+We shouldn't invent calendar dates without a supplied start date. Hindi rin puwedeng gawing day 0 ang unknown date because zero already has a specific meaning.
 
-### Kailangan tugma ang design sa instruction ni sir
+### Keeping the model aligned with the requirements
 
-Ang agreed Gold scope ay **five dimensions at exactly two facts**:
+We aligned the Gold scope with sir's instructions: **five dimensions and exactly two facts**.
 
 - Dimensions: `dim_student`, `dim_course`, `dim_module_presentation`, `dim_date`, `dim_demographics`.
-- Facts: `fact_assessments` at `fact_vle_interactions`.
+- Facts: `fact_assessments` and `fact_vle_interactions`.
 
-May supporting **`vw_student_outcomes` view** para kasama sa enrollment reporting ang students kahit walang recorded assessment o VLE activity.
+We also planned a supporting **`vw_student_outcomes` view**. This keeps the complete enrollment population in reporting, kasama ang students without recorded assessment or VLE activity.
 
-Isa pang lesson: kailangang i-aggregate separately ang dalawang facts bago pagsamahin sa enrollment-level reporting. Kapag detailed facts ang direktang pinag-join, puwedeng dumami ang rows at lumobo ang scores o clicks.
+Another lesson: aggregate the two facts separately before combining them for enrollment-level reporting. Kapag directly joined ang detailed facts, multiple matches can inflate row counts, scores, or clicks.
 
 ---
 
-## 🗂️ From “ikaw dito” to clear tasks
+## Organizing the team workflow
 
-Naayos din ang GitHub issues: may assigned owner, files na gagalawin, suggested branch, dependencies, at completion checklist. May priority labels na **P0, P1, at P2**, kasama ang area labels.
+We organized the GitHub issues with an owner, assigned files, suggested branch, dependencies, and a completion checklist. May **P0, P1, and P2** priority labels, plus area labels para easier to identify the type of work.
 
-Ang target completion namin ay **Thursday, September 10, 2026**.
+Our target completion is **Thursday, September 10, 2026**.
 
-Examples ng branch names:
+Some of the suggested branch names:
 
 - `feature/clean-assessments`
 - `feature/clean-students`
@@ -153,70 +154,68 @@ Examples ng branch names:
 - `feature/build-dimensions`
 - `docs/update-readme`
 
-Mas malinaw na sa akin na **one task can include several related files**. Puwedeng kasama sa isang branch ang transformation, tests, at related documentation.
+I also learned that **one task can include several related files**. The transformation, tests, and related documentation can stay on the same task branch. Hindi kailangan ng separate branch for every file.
 
-Ang goal ko sa pag-aayos nito: kapag binuksan ng teammate ang task niya, alam niya kung saan magsisimula, ano ang hinihintay niyang dependency, at paano niya masasabing tapos na.
+I wanted each task to give the assigned member a clear starting point. Para alam nila what to work on, which dependencies to wait for, and what evidence they need before marking it done.
 
 <!-- Add Rhea's supplied GitHub Issues or Project board screenshot here after upload. -->
 
 ### Honest progress check
 
-**Ready na ang foundation, recorded source profiling, documentation, file guides, at issue assignments.** Ang Silver implementation, dbt Gold models, dashboards, at working CI/CD ay susunod pang trabaho.
+**The foundation, recorded source profiling, documentation, file guides, and issue assignments are ready.** Pending pa ang Silver implementation, dbt Gold models, dashboards, and working CI/CD.
 
-May documented naming mismatches din sa ilang Bronze loaders at checks na kailangan naming itugma sa actual Databricks tables bago mag-run mula sa fresh environment.
+There are also documented naming mismatches in some Bronze loaders and checks. Kailangan naming align those with the actual Databricks tables before running from a fresh environment.
 
-Reminder sa sarili ko: ang maayos na folder structure at existing files ay simula pa lang. Ang proof ay nasa working code, validated results, at repeatable runs.
+Reminder to myself: a complete folder structure is only the starting point. Kailangan pa rin ng working code, validated results, and repeatable runs.
 
 ---
 
-## 💛 New team ulit… at medyo malungkot din pala ako
+## A new team, and mixed feelings
 
-Honestly, medyo malungkot ako kasi bagong assigned team na naman ang makakasama ko.
+Honestly, I feel a little sad about being assigned to a new team again.
 
-Nami-miss ko ang dati kong ka-group. Nakapagpalagayan na kami ng loob, at kabisado na namin kung paano gumalaw ang bawat isa. May comfort sa ganung setup—mas natural nang magtanong, makipag-usap, at kumilos nang magkakasama.
+I miss my previous group. Nakapagpalagayan na kami ng loob, and we already knew how each person worked. We had that comfortable rhythm where asking questions and coordinating felt natural.
 
-Kaya may adjustment ulit ngayon. Getting-to-know stage na naman.
+Now, we're back in the getting-to-know stage. May adjustment ulit, and I miss the familiarity of working with people I was already comfortable with.
 
-Pero nakakatuwa rin ang bagong team ko. Sinabi nila na **pinag-pray daw nila na maging ka-group ako.** 🥹
+But my new teammates made me smile. They told me **they prayed that I would be assigned to their group.**
 
-Nakakataba ng puso marinig iyon. Habang ako, may lungkot pa sa pag-miss sa dating team, sila pala masaya na makakasama nila ako.
+Nakakataba ng puso, honestly. While I was still missing my old group, they were already happy to have me on their team. That made this transition feel a little easier.
 
-Sa ngayon, medyo professional pa ang galaw namin. Ramdam mong nag-aadjust at nagpapalagayan pa ng loob. Naiintindihan ko naman—hindi naman automatic ang pagiging comfortable sa bagong group.
+Our interactions still feel a bit formal and professional for now. Nagpapalagayan pa kami ng loob, and I understand that. Being comfortable with a new group takes time.
 
-Tapos nung chinat ko sila, **nahihiya lang din pala sila sa akin.**
+Then I messaged them and found out that **they were just shy around me too.**
 
-Ako na introverted at naghahanap din ng way para maging close kami: *hala, pare-pareho lang pala tayo?!* 😭😂
+Meanwhile, I was also trying to figure out how to become closer to them because I'm introverted. So apparently, pare-pareho lang pala kaming nahihiya. Hahaha.
 
-Kaya sabi ko, mag-ask lang sila nang mag-ask sa akin para matuto kami pareho at maging close rin. Hindi ko naman alam lahat. May mga bagay na mas naiintindihan ko kapag pinag-uusapan namin o kapag kailangan kong i-explain.
+I told them to keep asking me questions para we can learn together and become more comfortable with each other. I don't know everything either. Sometimes, explaining something or discussing a question helps me understand it better too.
 
-Sinabi ko rin na introverted akong tao.
+When I told them I'm introverted, they said they were too.
 
-**Sila rin daw.**
-
-Ayon. Isang grupo ng introverts na naghihintayan lang pala kung sino ang unang magiging comfortable. Hahahahaha.
+Ayon, a group of introverts trying to get comfortable with one another. At least now we know why everyone seemed a little reserved. Hahaha.
 
 <!-- Add Rhea's supplied personal/team photo here if she chooses to include one. -->
 
-Ang gusto kong mabuo sa team namin ay yung comfortable kaming magsabi ng “hindi ko gets,” “patingin naman,” o “may idea ako.” Sana habang ginagawa namin ang project, mas maging madali rin ang conversations namin.
+I want us to feel comfortable saying “hindi ko gets,” asking for help, or sharing an idea. Hopefully, as we work through the project, those conversations will start to feel more natural.
 
-Puwede ko palang ma-miss ang dati kong team habang binibigyan ng chance ang bagong team na maging close sa akin. Hindi naman kailangang mawala agad ang lungkot para maging excited sa bagong simula.
+I can miss my old team and still look forward to getting close to this one. May lungkot pa, but I'm also glad that my new teammates were honest about how they felt.
 
 ---
 
-## 🌷 What I am taking with me
+## What I'm taking from today
 
-Today, mas naintindihan ko kung gaano karaming decisions ang kasama sa project setup: table grain, missing values, folder responsibilities, validation, at task dependencies.
+Today helped me understand how many decisions go into setting up a project: table grain, missing values, folder responsibilities, validation, and task dependencies. Mas clear na sa akin why these need to be discussed before everyone starts coding.
 
-At sa personal side, may simpleng reminder ako: **minsan, yung taong akala mong sobrang formal, nahihiya lang din pala tulad mo.**
+On the personal side, I learned that someone who seems very formal might just be shy too. Minsan, kailangan lang may unang mag-open ng conversation.
 
-Ang next step namin ay i-align ang Bronze names, simulan ang assigned transformations, at patunayan sa checks na tama ang outputs. Ang next step ko bilang teammate: patuloy na mag-open ng conversation at gawing welcome ang questions.
+Next, we'll align the Bronze names, implement the assigned transformations, and validate the outputs. As a teammate, I'll keep encouraging questions para we can learn together and get more comfortable working as a group.
 
-**Current status: OULAD foundation prepared. Team closeness loading…** 🌱💛
+*OULAD foundation prepared. Getting comfortable with the team is still a work in progress, pero we're getting there.*
 
 ---
 
 <details>
-<summary>📚 Project notes na puwede kong balikan</summary>
+<summary>Project references</summary>
 
 - [Pipeline plan](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline/blob/main/docs/pipeline_plan.md)
 - [Source profiling results](https://github.com/ItsYangCoder/oulad-data-engineering-pipeline/blob/main/docs/source_assessment.md)
