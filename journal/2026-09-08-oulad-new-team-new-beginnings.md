@@ -10,7 +10,7 @@ Today, we worked on the OULAD project foundation: folder structure, documentatio
 
 While setting up the project, I'm also adjusting to a new team. New dataset, new workflow, and new people to work with. Sabay ang technical setup at getting-to-know stage namin today. Hahaha.
 
-![OULAD project setup](../assets/image%20(1).png)
+![OULAD project setup](../assets/oulad-project-setup%20.png)
 
 ---
 
@@ -158,7 +158,7 @@ I also learned that **one task can include several related files**. The transfor
 
 I wanted each task to give the assigned member a clear starting point. Para alam nila what to work on, which dependencies to wait for, and what evidence they need before marking it done.
 
-![OULAD repository folders and assigned implementation files](../assets/image%20(2).png)
+![OULAD repository folders and assigned implementation files](../assets/oulad-project-board%20.png)
 
 ### Honest progress check
 
@@ -194,7 +194,8 @@ When I told them I'm introverted, they said they were too.
 
 Ayon, a group of introverts trying to get comfortable with one another. At least now we know why everyone seemed a little reserved. Hahaha.
 
-<!-- Add Rhea's supplied personal/team photo here if she chooses to include one. -->
+
+![OULAD new team member](../assets/oulad-project-board%20.png)
 
 I want us to feel comfortable saying “hindi ko gets,” asking for help, or sharing an idea. Hopefully, as we work through the project, those conversations will start to feel more natural.
 
