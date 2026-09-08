@@ -83,11 +83,11 @@ The people in this illustration are AI-generated, but the anonymized message is 
 
 ## Mood or meme (optional)
 
-- Today felt like: **“I was setting up a data pipeline, pero may unexpected soft-skills validation test din pala—and somehow, it passed.”**
+- Today felt like: **“The dashboard gets the attention, while data infrastructure quietly keeps the whole project alive.”**
 
-![Two-panel meme about setting up a data pipeline and unexpectedly passing a soft-skills test](../assets/oulad-soft-skills-meme.jpg)
+![Dashboard being supported by data infrastructure](../assets/dashboard-data-infra-meme.png)
 
-*When the project setup turns into an unexpected emotional validation test. Allergies lang ito.*
+*The dashboard may look effortless, pero behind it, data infrastructure is doing the rescue mission.*
 
 ---
 
