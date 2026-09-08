@@ -85,7 +85,7 @@ The people in this illustration are AI-generated, but the anonymized message is 
 
 - Today felt like: **“The dashboard gets the attention, while data infrastructure quietly keeps the whole project alive.”**
 
-![Dashboard being supported by data infrastructure](../assets/meme-alaking.png)
+![Dashboard being supported by data infrastructure](../assets/meme-alaking.jpg)
 
 *The dashboard may look effortless, pero behind it, data infrastructure is doing the rescue mission.*
 
