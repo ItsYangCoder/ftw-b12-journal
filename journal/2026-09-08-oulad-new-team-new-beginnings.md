@@ -158,7 +158,7 @@ I also learned that **one task can include several related files**. The transfor
 
 I wanted each task to give the assigned member a clear starting point. Para alam nila what to work on, which dependencies to wait for, and what evidence they need before marking it done.
 
-<!-- Add Rhea's supplied GitHub Issues or Project board screenshot here after upload. -->
+![OULAD project setup](.../assets/image(2).png)
 
 ### Honest progress check
 
