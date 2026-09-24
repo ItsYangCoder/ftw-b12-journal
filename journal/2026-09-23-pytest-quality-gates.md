@@ -54,4 +54,4 @@
 - Sir. Myk: "basic lang yang group project nyo". Me looking at the code:
 
 ![Successful GitHub Actions deployment to Databricks, used as a safe example of the automated pipeline goal](../assets/basic_meme.jpg)
-- image from google
+>image from google
