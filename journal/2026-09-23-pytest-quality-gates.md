@@ -51,8 +51,8 @@
 - What do I want to understand better next time? I want to trace one test from its Python function, through pytest discovery, into GitHub Actions, and then explain exactly what pipeline risk it prevents.
 
 ## Mood or meme (optional)
-- The satisfying part of Data Engineering is not only seeing one green check. It is understanding why every check is green and what failure it is designed to catch.
+- Sir. Myk: "basic lang yang group project nyo". Me looking at the code:
 
-![Successful GitHub Actions deployment to Databricks, used as a safe example of the automated pipeline goal](../assets/ci-cd-databricks-dev-success.png)
+![Successful GitHub Actions deployment to Databricks, used as a safe example of the automated pipeline goal](../assets/basic_meme.jng)
 
 This existing repository image shows a successful GitHub Actions workflow reaching Databricks. It is a visual reminder of the larger goal: local quality gates should become repeatable automated checks before deployment.
