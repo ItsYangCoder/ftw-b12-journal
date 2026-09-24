@@ -53,6 +53,6 @@
 ## Mood or meme (optional)
 - Sir. Myk: "basic lang yang group project nyo". Me looking at the code:
 
-![Successful GitHub Actions deployment to Databricks, used as a safe example of the automated pipeline goal](../assets/basic_meme.jng)
+![Successful GitHub Actions deployment to Databricks, used as a safe example of the automated pipeline goal](../assets/basic_meme.jpg)
 
 This existing repository image shows a successful GitHub Actions workflow reaching Databricks. It is a visual reminder of the larger goal: local quality gates should become repeatable automated checks before deployment.
