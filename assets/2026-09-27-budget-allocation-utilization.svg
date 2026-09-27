@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#f7f7f7"/>
+<text x="600" y="85" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="700" fill="#222">From Budget Allocation to Utilization</text>
+<text x="600" y="130" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#555">Turning a research question into measurable data</text>
+<rect x="80" y="220" rx="18" width="260" height="150" fill="#fff" stroke="#555" stroke-width="3"/>
+<text x="210" y="275" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" font-weight="700">Allocation</text>
+<text x="210" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="21">Allotments</text>
+<path d="M350 295 H455" stroke="#555" stroke-width="5" marker-end="url(#a)"/>
+<rect x="470" y="220" rx="18" width="260" height="150" fill="#fff" stroke="#555" stroke-width="3"/>
+<text x="600" y="275" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" font-weight="700">Utilization</text>
+<text x="600" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="21">Obligations + Disbursements</text>
+<path d="M740 295 H845" stroke="#555" stroke-width="5" marker-end="url(#a)"/>
+<rect x="860" y="220" rx="18" width="260" height="150" fill="#fff" stroke="#555" stroke-width="3"/>
+<text x="990" y="275" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" font-weight="700">Trend</text>
+<text x="990" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="21">Department • Agency • Year</text>
+<text x="600" y="455" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" fill="#333">Key lesson: define the grain and metrics before building the pipeline.</text>
+<text x="600" y="510" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" fill="#666">A clear analytical question becomes a data contract for ingestion, modeling, and validation.</text>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs>
+</svg>
