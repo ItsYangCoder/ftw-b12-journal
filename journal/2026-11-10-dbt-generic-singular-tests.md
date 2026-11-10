@@ -39,9 +39,9 @@ Use this version only if you want more structure. The basic `entry.md` is enough
 - [ ] Make a small OULAD test map with three columns—contract, generic or singular test, and failure meaning—for the VLE interaction fact.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I am recording a concept reflection because I found no verified November 10 implementation commit in the checked Data Engineering repositories.
