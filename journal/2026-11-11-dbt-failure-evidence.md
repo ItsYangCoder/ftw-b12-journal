@@ -35,9 +35,9 @@ Use this version only if you want more structure. The basic `entry.md` is enough
 - [ ] Draft a one-page failure-evidence design for `vle_click_reconciliation.sql`: list the safe diagnostic columns, audit schema, permissions, retention period, invocation metadata, and one controlled acceptance test.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I am recording this as a proposed portfolio improvement, not as completed OULAD work.
