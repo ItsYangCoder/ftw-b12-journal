@@ -49,9 +49,9 @@ GROUP BY region_code;
 - [ ] Write one review query for PondoLens `service_access` that groups at its full business grain and returns three explicit counts: expected keys, present keys, and available measurements.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I am recording a concept reflection based on existing PondoLens code; I am not claiming a new SQL execution or implementation today.
