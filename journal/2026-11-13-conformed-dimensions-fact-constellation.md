@@ -49,9 +49,9 @@ Use this version only if you want more structure. The basic `entry.md` is enough
 - [ ] Draft one PondoLens comparison query that aggregates reported obligations and one selected development indicator separately to `year_id × location_id`, joins the two result sets, and proves that expenditure totals did not change after the join.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I am documenting existing model behavior and a safe query pattern; I am not claiming a new dbt build or dashboard update today.
