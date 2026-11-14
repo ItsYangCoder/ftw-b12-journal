@@ -41,9 +41,9 @@ Use this version only if you want more structure. The basic `entry.md` is enough
 - [ ] Draft a three-row SQL fixture containing one new source key, one target key missing from source, and one matched key with a changed amount; predict the result of both anti-join directions and the later merge before running it.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I am recording a concept reflection today because the practice prompt is verified but its answer is blank; I am not claiming a query execution or implementation result.
