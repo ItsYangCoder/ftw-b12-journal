@@ -47,9 +47,9 @@ Use this version only if you want more structure. The basic `entry.md` is enough
 - [ ] Create a disposable Delta test table with one `record_id`, launch two controlled merge attempts against that same key, and capture both job results plus `DESCRIBE HISTORY`; do not apply the experiment to a production table.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I am documenting a concept reflection because today’s Delta Lake practice answer is empty; I am not claiming that I executed the proposed concurrency test.
