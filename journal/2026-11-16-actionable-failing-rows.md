@@ -50,9 +50,9 @@ Use this version only if you want more structure. The basic `entry.md` is enough
 - [ ] Build a five-row fixture with one valid key, one key repeated three times, and one row containing a NULL key component; predict the failing groups, affected rows, and excess rows before running the OULAD grain test against it.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I am writing a learning reflection because today’s practice answer is empty; I am not claiming that I executed a new NULL or duplicate query.
