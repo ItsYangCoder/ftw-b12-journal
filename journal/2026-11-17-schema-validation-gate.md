@@ -53,9 +53,9 @@ Use this version only if you want more structure. The basic `entry.md` is enough
 - [ ] Create four tiny DataFrames—exact match, reordered columns, one added column, and one widened numeric type—and document which cases the current PondoLens comparison rejects before deciding whether the rule should remain order-sensitive.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I am writing a concept reflection because today’s practice answer is empty; I am not claiming that I executed a new schema-drift test.
