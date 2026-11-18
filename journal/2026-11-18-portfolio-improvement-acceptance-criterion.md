@@ -26,9 +26,9 @@ Use this version only if you want more structure. The basic `entry.md` is enough
 - [ ] Open the NYC Mobility repository and write one improvement card with exactly four fields: current gap, expected behavior, acceptance criterion, and evidence link.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I chose a concept-focused reflection because the only new verified activity was the practice-log commit and its answer remained blank.
