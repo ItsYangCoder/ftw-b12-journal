@@ -47,9 +47,9 @@ HAVING COUNT(*) > 1;
 - [ ] Run the duplicate-group query against the completion-rate Silver model, record the actual number of returned groups, and decide whether national rows need a separate grain check.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I used the five columns visible in the historical merge-key screenshot as a concrete learning example; I am not claiming that they have been verified as the final business key.
