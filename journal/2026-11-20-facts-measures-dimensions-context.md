@@ -45,9 +45,9 @@ GROUP BY y.fiscal_year;
 - [ ] Run one PondoLens query that compares `AVG(execution_rate)` with `SUM(obligation_amount) / SUM(appropriation_amount)` for a single fiscal year, then document why the results match or differ.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I focused on measure behavior because the basic fact-versus-dimension definition was already covered in earlier journal entries.
