@@ -52,9 +52,9 @@ FULL OUTER JOIN silver_regional_obligations AS o
 - [ ] Run a full-outer-join diagnostic on one PondoLens fiscal year and record the counts of `MATCHED`, `APPROPRIATION_ONLY`, and `OBLIGATION_ONLY` rows before any reporting filters.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I selected a full outer join because left anti join direction was already covered in a recent entry.
