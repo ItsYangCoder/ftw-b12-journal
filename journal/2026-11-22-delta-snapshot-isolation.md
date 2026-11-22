@@ -41,9 +41,9 @@ VERSION AS OF <verified_version>;
 - [ ] Run `DESCRIBE HISTORY` on one PondoLens Bronze Delta table, record the latest version and operation, then rerun one profiling query with an explicit verified version.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I focused on read snapshots because optimistic concurrency for writers was already covered in a recent journal entry.
