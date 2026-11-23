@@ -53,9 +53,9 @@ FROM duplicate_grain;
 - [ ] Inspect one PondoLens Silver model and its schema documentation, write down the required key columns versus allowed nullable measures, then add one zero-row data-quality test for that documented rule.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I separated required identifiers from optional measures instead of recommending a blanket `not_null` rule.
