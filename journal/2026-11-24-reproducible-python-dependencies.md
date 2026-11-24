@@ -32,9 +32,9 @@
 - [ ] On a feature branch, generate a Python 3.12 constraints file from the current direct dependencies, install from it in a second clean environment, and record whether the full offline pytest suite passes unchanged.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I selected dependency reproducibility because the repository evidence shows a fixed Python version and CI tests alongside an unconstrained requirements file.
