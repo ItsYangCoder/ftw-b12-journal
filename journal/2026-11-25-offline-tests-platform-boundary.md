@@ -33,9 +33,9 @@
 - [ ] Draft one minimal NYC Mobility Databricks smoke-test specification with its fixture, required permissions, expected schema and row count, cleanup action, and safe workflow trigger—without adding credentials to the repository.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I kept the current offline pytest suite as the fast pull-request gate and treated the workspace smoke test as a separate future layer.
