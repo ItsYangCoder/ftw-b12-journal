@@ -61,9 +61,9 @@ HAVING COUNT(DISTINCT weather.weather_hour) <> expected.expected_hours
 - [ ] Inspect the acquired March weather timestamps around the `America/New_York` daylight-saving transition, document the API’s actual timestamp contract, and compare it with the current `days × 24` expectation.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I extended the `HAVING` prompt into a real coverage problem instead of repeating the earlier duplicate-group example.
