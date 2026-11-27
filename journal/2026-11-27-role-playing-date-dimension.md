@@ -50,9 +50,9 @@ LEFT JOIN dim_date AS unregistration
 - [ ] Write and run one OULAD query that joins `dim_date` as registration and unregistration roles, then verify that the enrollment row count and distinct `enrollment_key` count remain unchanged.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I used a role-playing date dimension as the learning topic because the general fact-versus-dimension and fact-constellation concepts already appear in earlier entries.
