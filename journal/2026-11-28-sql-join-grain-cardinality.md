@@ -48,9 +48,9 @@ Use this version only if you want more structure. The basic `entry.md` is enough
 - [ ] Write the enrollment-to-course `LEFT JOIN` in a scratch SQL file, then add one duplicate-key check and one unmatched-key count before interpreting the result.
 
 ## Git checkpoint
-- [ ] I created or updated a file
-- [ ] I wrote a commit
-- [ ] I pushed my changes
+- [x] I created or updated a file
+- [x] I wrote a commit
+- [x] I pushed my changes
 
 ## Decisions or assumptions (optional)
 - I chose `LEFT JOIN` for the example because preserving the fact table makes missing course references observable.
